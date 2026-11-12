@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momenta Growth — Performance Comercial e Operacional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E2A2B;      /* verde-petróleo profundo */
+    --ink-2:#163B3C;
+    --lime:#D4F24A;     /* lima — crescimento */
+    --cream:#F5F2EA;    /* creme — base */
+    --paper:#FFFDF8;
+    --clay:#E2643B;     /* terracota — alertas/perdas */
+    --muted:#5B6B6B;
+    --line:#E3DED2;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.display{font-family:"Bricolage Grotesque",Inter,sans-serif;letter-spacing:-.02em;line-height:1.05}
+  a{color:inherit}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  section{padding:96px 0}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:20;background:rgba(245,242,234,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand b{font-family:"Bricolage Grotesque";font-size:1.25rem;font-weight:800;letter-spacing:-.02em}
+  .brand span{font-weight:500;color:var(--muted)}
+  nav ul{display:flex;gap:28px;list-style:none;font-size:.92rem;font-weight:500}
+  nav ul a{text-decoration:none;opacity:.8}
+  nav ul a:hover{opacity:1}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:600 .95rem Inter,sans-serif;padding:13px 22px;border-radius:999px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-ink{background:var(--ink);color:var(--cream)}
+  .btn-lime{background:var(--lime);color:var(--ink)}
+  .btn-ghost{background:transparent;color:inherit;border:1.5px solid currentColor}
+  @media(max-width:860px){nav ul{display:none}}
+  @media(max-width:480px){.brand span{display:none} nav .btn{padding:10px 16px;font-size:.85rem;white-space:nowrap}}
+
+  /* HERO */
+  .hero{padding:72px 0 88px}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800}
+  .hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--lime) 62%)}
+  .hero p.lead{font-size:1.18rem;color:var(--ink-2);margin:24px 0 32px;max-width:34em}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-card{background:var(--ink);color:var(--cream);border-radius:28px;padding:32px;position:relative;overflow:hidden}
+  .hero-card .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(245,242,234,.12)}
+  .hero-card .kpi:last-of-type{border:0}
+  .hero-card .kpi small{opacity:.7;font-size:.85rem}
+  .hero-card .kpi strong{font-family:"Bricolage Grotesque";font-size:1.6rem}
+  .up{color:var(--lime)} .down{color:#FF9C7A}
+  .bars{display:flex;align-items:flex-end;gap:8px;height:90px;margin:8px 0 18px}
+  .bars i{flex:1;background:rgba(212,242,74,.25);border-radius:6px 6px 2px 2px}
+  .bars i:last-child{background:var(--lime)}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+
+  /* SEGMENTOS */
+  .strip{background:var(--ink);color:var(--cream);padding:22px 0;overflow:hidden}
+  .strip .row{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;font-family:"Bricolage Grotesque";font-size:1.15rem;font-weight:500}
+  .strip .row span::before{content:"●";color:var(--lime);margin-right:12px;font-size:.6em;vertical-align:middle}
+
+  /* PILARES */
+  .sec-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:48px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;max-width:16em}
+  .sec-head p{max-width:28em;color:var(--muted)}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .pillar{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .pillar .ic{width:44px;height:44px;border-radius:12px;background:var(--lime);display:grid;place-items:center;margin-bottom:18px}
+  .pillar h3{font-size:1.35rem;margin-bottom:10px}
+  .pillar ul{list-style:none;color:var(--ink-2);font-size:.95rem}
+  .pillar li{padding:6px 0;border-top:1px dashed var(--line)}
+  .pillar li:first-child{border-top:0}
+  @media(max-width:860px){.pillars{grid-template-columns:1fr}}
+
+  /* COMO FUNCIONA */
+  .how{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+  .step{padding-top:18px;border-top:3px solid var(--ink)}
+  .step::before{counter-increment:s;content:"0" counter(s);font-family:"Bricolage Grotesque";font-weight:800;font-size:2.4rem;display:block;margin-bottom:6px}
+  .step h3{font-size:1.15rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.94rem}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+
+  /* PLANOS */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+  .plan{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:32px;display:flex;flex-direction:column}
+  .plan.featured{background:var(--ink);color:var(--cream);border-color:var(--ink);position:relative}
+  .plan.featured .tag{position:absolute;top:-13px;left:32px;background:var(--lime);color:var(--ink);font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase}
+  .plan h3{font-size:1.5rem}
+  .plan .for{font-size:.9rem;opacity:.75;margin:6px 0 22px;min-height:2.8em}
+  .price{font-family:"Bricolage Grotesque";font-weight:800;font-size:2.8rem;line-height:1}
+  .price small{font:500 .95rem Inter,sans-serif;opacity:.7}
+  .price-note{font-size:.82rem;opacity:.7;margin:8px 0 24px}
+  .plan ul{list-style:none;flex:1;margin-bottom:28px}
+  .plan li{padding:8px 0 8px 28px;position:relative;font-size:.95rem;border-top:1px solid var(--line)}
+  .plan.featured li{border-color:rgba(245,242,234,.12)}
+  .plan li::before{content:"";position:absolute;left:0;top:13px;width:16px;height:16px;border-radius:50%;background:var(--lime);box-shadow:inset 0 0 0 4px var(--lime)}
+  .plan li.plus{font-weight:600}
+  .plan li.plus::before{background:var(--ink)}
+  .plan.featured li.plus::before{background:var(--lime);box-shadow:none}
+  .plan .btn{justify-content:center}
+  @media(max-width:960px){.plans{grid-template-columns:1fr}}
+  .cond{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .cond div{background:rgba(212,242,74,.35);border-radius:14px;padding:16px 18px;font-size:.92rem}
+  .cond b{display:block;font-family:"Bricolage Grotesque";font-size:1.05rem}
+  @media(max-width:860px){.cond{grid-template-columns:1fr}}
+
+  /* AVULSOS */
+  .table{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .trow{display:grid;grid-template-columns:1.1fr 1.6fr .7fr;gap:20px;padding:20px 28px;border-top:1px solid var(--line);align-items:center}
+  .trow:first-child{border-top:0}
+  .trow h4{font-family:"Bricolage Grotesque";font-size:1.1rem}
+  .trow p{color:var(--muted);font-size:.92rem}
+  .trow .v{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.25rem;text-align:right;white-space:nowrap}
+  .trow .v small{display:block;font:500 .75rem Inter;color:var(--muted)}
+  @media(max-width:760px){.trow{grid-template-columns:1fr}.trow .v{text-align:left}}
+
+  /* SIMULADOR */
+  .sim{background:var(--ink);color:var(--cream);border-radius:32px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  .sim h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;margin-bottom:12px}
+  .sim .sub{opacity:.75;margin-bottom:28px}
+  .field{margin-bottom:22px}
+  .field label{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:8px;opacity:.9}
+  .field label output{font-weight:700;color:var(--lime)}
+  input[type=range]{width:100%;accent-color:var(--lime)}
+  .result{background:var(--ink-2);border-radius:22px;padding:32px;display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .result .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--lime);line-height:1}
+  .result .line{display:flex;justify-content:space-between;border-top:1px solid rgba(245,242,234,.12);padding-top:12px;font-size:.95rem}
+  .result .line b{font-family:"Bricolage Grotesque"}
+  .result .fine{font-size:.78rem;opacity:.6}
+  @media(max-width:860px){.sim{grid-template-columns:1fr;padding:28px}}
+
+  /* CONTATO */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .contact h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:16px}
+  form{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px;display:grid;gap:14px}
+  form label{font-size:.85rem;font-weight:600}
+  form input,form select,form textarea{width:100%;margin-top:6px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff;color:var(--ink)}
+  form input:focus,form select:focus,form textarea:focus{outline:none;border-color:var(--ink)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  #msgOut{display:none;background:rgba(212,242,74,.35);border-radius:14px;padding:16px;font-size:.92rem;white-space:pre-wrap}
+  @media(max-width:860px){.contact{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+
+  footer{background:var(--ink);color:var(--cream);padding:48px 0 32px;margin-top:40px}
+  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  footer p{font-size:.85rem;opacity:.7}
+  footer .brand b{color:var(--cream)}
+  .segs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .seg{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:10px}
+  .seg h3{font-size:1.3rem}
+  .seg p{color:var(--muted);font-size:.92rem;flex:1}
+  .seg span{font-size:.82rem;font-weight:600;background:rgba(212,242,74,.45);padding:8px 10px;border-radius:10px}
+  @media(max-width:960px){.segs{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.segs{grid-template-columns:1fr}}
+  .pillars.six .ic{font-family:"Bricolage Grotesque";font-weight:800;font-size:1rem}
+  @media(min-width:861px){.pillars.six{grid-template-columns:repeat(3,1fr)}}
+  .picker{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:36px}
+  .picker .eyebrow{margin-bottom:10px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .tab{border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:10px 16px;font:600 .92rem Inter,sans-serif;cursor:pointer;text-align:left}
+  .tab small{display:block;font-weight:500;font-size:.75rem;color:var(--muted)}
+  .tab.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .tab.on small{color:var(--lime)}
+  .wa-float{position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:30}
+  .carta-grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+  .carta{display:grid;gap:20px}
+  .cgroup .eyebrow{margin-bottom:8px}
+  .citem{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:8px;cursor:pointer;font-size:.95rem}
+  .citem.on{border-color:var(--ink);background:#fff}
+  .citem input{width:18px;height:18px;accent-color:var(--ink)}
+  .citem b{font-family:"Bricolage Grotesque";white-space:nowrap}
+  .citem b small{font:500 .75rem Inter;color:var(--muted)}
+  .ctotal{position:sticky;top:88px;background:var(--ink);color:var(--cream);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px}
+  .ctotal .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:2.4rem;color:var(--lime);line-height:1}
+  .chint{display:none;background:var(--ink-2);border-radius:14px;padding:14px;font-size:.9rem}
+  .chint b{color:var(--lime)}
+  .ctotal .fine{font-size:.78rem;opacity:.6}
+  @media(max-width:900px){.carta-grid{grid-template-columns:1fr}.ctotal{position:static}}
+  .hero-photo{position:relative;border-radius:28px;overflow:hidden;background:var(--ink);aspect-ratio:4/5}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+  .hero-stats{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(14,42,43,.92);backdrop-filter:blur(6px);color:var(--cream);border-radius:18px;padding:16px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .hero-stats strong{display:block;font-family:"Bricolage Grotesque";font-size:1.25rem;color:var(--lime);line-height:1.1}
+  .hero-stats small{font-size:.74rem;opacity:.8;line-height:1.3;display:block;margin-top:4px}
+  .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+  .about-photo{border-radius:28px;overflow:hidden;position:sticky;top:96px}
+  .about-photo img{width:100%;display:block}
+  .about h2{font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:800;margin:12px 0 20px}
+  .about p{margin-bottom:14px;color:var(--ink-2)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips span{border:1.5px solid var(--ink);border-radius:999px;padding:7px 14px;font-weight:600;font-size:.9rem}
+  @media(max-width:860px){.about{grid-template-columns:1fr}.about-photo{position:static;max-width:420px}}
+  .cases{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:16px}
+  .case{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .case h3{font-size:1.25rem;margin-bottom:8px}
+  .case p{font-size:.92rem;color:var(--muted)}
+  .featured-case{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .featured-case h3{font-size:1.7rem;color:var(--lime);margin:6px 0 10px}
+  .featured-case p{color:rgba(245,242,234,.85)}
+  @media(max-width:960px){.cases{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.cases{grid-template-columns:1fr}}
+  .together{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:16px}
+  .tcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .tcard h3{font-size:1.2rem;margin-bottom:8px}
+  .tcard p{font-size:.93rem;color:var(--muted)}
+  .tcard.need{background:rgba(212,242,74,.35);border-color:transparent}
+  .tcard.need ul{list-style:none;font-size:.93rem;margin:6px 0 12px}
+  .tcard.need li{padding:6px 0 6px 22px;position:relative;border-top:1px dashed rgba(14,42,43,.18)}
+  .tcard.need li:first-child{border-top:0}
+  .tcard.need li::before{content:"✓";position:absolute;left:0;font-weight:700}
+  .fine-dark{font-size:.82rem!important;color:var(--ink-2)!important}
+  @media(max-width:960px){.together{grid-template-columns:1fr}}
+  .desde{font-size:.8rem;opacity:.7;display:block;margin-bottom:2px}
+  .price sup{font-size:.45em;vertical-align:super}
+  .faq{display:grid;gap:10px;max-width:860px}
+  .faq details{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 22px}
+  .faq summary{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.12rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::after{content:"+";font-size:1.4rem;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{margin-top:10px;color:var(--ink-2)}
+  .privacy{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 22px;font-size:.92rem}
+  .privacy summary{font-weight:700;cursor:pointer}
+  .privacy p{margin-top:10px;color:var(--ink-2)}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-weight:500!important;font-size:.85rem!important}
+  .consent input{width:auto!important;margin-top:3px!important}
+  footer a{color:var(--lime)}
+</style>
+</head>
+<body>
+
+<!-- LOGO (símbolo): "M" formado por barras crescentes -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 40 40">
+    <rect width="40" height="40" rx="11" fill="#0E2A2B"/>
+    <rect x="8"  y="20" width="5" height="12" rx="2" fill="#F5F2EA"/>
+    <rect x="15.5" y="14" width="5" height="18" rx="2" fill="#F5F2EA"/>
+    <rect x="23" y="17" width="5" height="15" rx="2" fill="#F5F2EA"/>
+    <rect x="30.5" y="8" width="5" height="24" rx="2" fill="#D4F24A"/>
+  </symbol>
+</svg>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg width="34" height="34"><use href="#mark"/></svg><b>momenta</b><span>growth</span></a>
+    <ul>
+      <li><a href="#sobre">Quem somos</a></li>
+      <li><a href="#segmentos">Segmentos</a></li>
+      <li><a href="#solucoes">Soluções</a></li>
+      <li><a href="#como">Como funciona</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#avulsos-itens">Avulsos</a></li>
+      <li><a href="#faq">Dúvidas</a></li>
+          </ul>
+    <a class="btn btn-ink" href="#contato">Conversa gratuita</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Performance Comercial e Operacional · Jaraguá do Sul e todo o Brasil</p>
+      <h1 style="margin-top:14px">Sua empresa vende. A gente faz ela <em>render</em>.</h1>
+      <p class="lead">Do pequeno comércio à indústria: cuidamos dos números, do estoque, do preço, da loja e da estratégia comercial. Medimos, corrigimos e acompanhamos de perto, com relatórios a cada 15 dias.</p>
+      <div class="ctas">
+        <a class="btn btn-ink" href="#contato">Agendar conversa gratuita</a>
+        <a class="btn btn-ghost" href="#planos">Ver planos e preços</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/alefe-hero.jpg" alt="Àlefe Brendon, fundador da Momenta Growth">
+      <div class="hero-stats">
+        <div><strong>12+ anos</strong><small>em grandes players do varejo alimentar</small></div>
+        <div><strong>3 lojas</strong><small>inauguradas, +R$ 1,5 mi/mês somadas</small></div>
+        <div><strong>500+</strong><small>empresas sob gestão hoje</small></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip"><div class="wrap row">
+  <span>Varejo</span><span>Atacado e distribuição</span><span>Indústria</span><span>Food service</span><span>Pequenas, médias e grandes</span>
+</div></div>
+
+<section id="sobre">
+  <div class="wrap about">
+    <div class="about-photo"><img src="img/alefe-sobre.jpg" alt="Àlefe Brendon"></div>
+    <div>
+      <p class="eyebrow">Quem é a Momenta</p>
+      <h2>Alta performance de quem já esteve do lado de dentro da loja</h2>
+      <p>A Momenta Growth nasceu de uma vontade minha: levar para empresários de pequenas, médias e grandes empresas a alta performance que aprendi na operação. O propósito é tirar empresas de situações difíceis e levá-las a um alto desempenho em vendas, na operação e no financeiro.</p>
+      <p>Sou <b>Àlefe Brendon</b>. São mais de 12 anos de expertise em grandes players do varejo alimentar, passando por varejo de proximidade, atacado e indústria. Atuei em patrimônio, abastecimento, layout, planograma, comercial e prevenção de perdas. Fui gerente de loja, coordenador de operações e executivo, e inaugurei 3 operações de cerca de 100 m² que, juntas, faturavam mais de R$ 1,5 milhão por mês.</p>
+      <p>Minha especialidade é a operação supermercadista, a gestão estratégica comercial e a formação de preço. Hoje também atuo na área tributária, na gestão de mais de 500 empresas e mais de 800 parceiros comerciais. É sempre o mesmo foco: performance de vendas, na operação e na estratégia.</p>
+      <div class="chips" style="margin-top:24px"><span>12+ anos de expertise</span><span>Grandes players do varejo alimentar</span><span>Varejo, atacado e indústria</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Cases</h2><p>Resultados que vieram da operação e foram replicados em várias lojas.</p></div>
+    <div class="cases">
+      <div class="case featured-case">
+        <p class="eyebrow" style="color:rgba(245,242,234,.6)">Cliente Momenta · Jaraguá do Sul</p>
+        <h3>Aroma do Pão</h3>
+        <p>Padaria e café acompanhados com inventário, análise de vendas, DRE e relatório gerencial de performance, com controle de validade dos perecíveis e um painel alimentado pelas notas de compra e pelo faturamento da maquininha.</p>
+      </div>
+      <div class="case"><h3>3 lojas inauguradas</h3><p>Operações de proximidade de cerca de 100 m² que, somadas, passaram de R$ 1,5 milhão de faturamento por mês.</p></div>
+      <div class="case"><h3>Redução de perdas</h3><p>Rotinas de prevenção de perdas, validade e contagem que foram multiplicadas para várias lojas da rede.</p></div>
+      <div class="case"><h3>Estoque zero e aproveitamento</h3><p>Fim de rupturas e aproveitamento de estoque parado, liberando caixa sem perder venda.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="segmentos">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Para quem a Momenta trabalha</h2>
+      <p>Toda empresa que compra, produz ou vende tem margem, estoque e estratégia comercial para melhorar. Muda o foco, não a lógica.</p>
+    </div>
+    <div class="segs">
+      <div class="seg"><h3>Varejo</h3><p>Supermercados, padarias, mercearias, conveniência, lojas de material, farmácias, pet, moda.</p><span>Foco: margem, ruptura, layout e planograma</span></div>
+      <div class="seg"><h3>Atacado e distribuição</h3><p>Distribuidoras, atacarejos, representações comerciais, centros de distribuição.</p><span>Foco: carteira de clientes, preço, giro e equipe de vendas</span></div>
+      <div class="seg"><h3>Indústria</h3><p>Alimentos, bebidas, confecção, metalmecânica, embalagens e indústrias de pequeno e médio porte.</p><span>Foco: custo de produção, mix, canais e presença no PDV</span></div>
+      <div class="seg"><h3>Food service</h3><p>Restaurantes, bares, cafés, lanchonetes, cozinhas industriais e redes de franquia.</p><span>Foco: CMV, fichas técnicas, cardápio e salão</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="solucoes" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Seis frentes que mexem no resultado</h2>
+      <p>Você contrata o que faz sentido para o momento da empresa. Nos planos, as frentes se combinam.</p>
+    </div>
+    <div class="pillars six">
+      <div class="pillar"><div class="ic">01</div><h3>Números e finanças</h3><ul><li>DRE mensal e EBITDA</li><li>Fluxo de caixa e capital de giro</li><li>Relatório gerencial</li><li>Valuation do negócio</li></ul></div>
+      <div class="pillar"><div class="ic">02</div><h3>Estoque e suprimentos</h3><ul><li>Inventário cíclico e geral</li><li>Compras, giro e cobertura</li><li>Curva ABC e validade</li><li>Contratos com fornecedores</li></ul></div>
+      <div class="pillar"><div class="ic">03</div><h3>Preço e margem</h3><ul><li>Formação de preço de venda</li><li>Custo × preço e markup</li><li>Política de preços e descontos</li><li>Fichas técnicas e custo industrial</li><li>Margem por produto, cliente e canal</li></ul></div>
+      <div class="pillar"><div class="ic">04</div><h3>Loja e exposição</h3><ul><li>Layout de loja e fluxo de clientes</li><li>Planograma por categoria</li><li>Gestão de categorias e mix</li><li>Ruptura e pontos extras</li></ul></div>
+      <div class="pillar"><div class="ic">05</div><h3>Estratégia comercial</h3><ul><li>Plano comercial e metas</li><li>Canais, carteira e territórios</li><li>Campanhas e calendário promocional</li><li>Trade marketing no PDV</li></ul></div>
+      <div class="pillar"><div class="ic">06</div><h3>Operação e equipe</h3><ul><li>Rotinas e indicadores (KPIs)</li><li>Metas e comissionamento</li><li>Processos e produtividade</li><li>Treinamento de equipe de vendas</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="como">
+  <div class="wrap">
+    <div class="sec-head"><h2>Como funciona</h2><p>O primeiro passo é uma conversa gratuita. Só o diagnóstico em diante tem custo.</p></div>
+    <div class="steps">
+      <div class="step"><h3>Conversa gratuita</h3><p>Um bate-papo sem custo para entender a empresa, os números e onde dói. Presencial ou online.</p></div>
+      <div class="step"><h3>Diagnóstico</h3><p>Leitura de vendas, notas, custos e da operação comercial. Você recebe um raio-x com o plano de ação. A partir de R$ 390,99.</p></div>
+      <div class="step"><h3>Rotina de performance</h3><p>Base arrumada (inventário, custos, preços) e relatórios a cada 15 dias com as ações da quinzena seguinte.</p></div>
+      <div class="step"><h3>Revisão semestral</h3><p>A cada 6 meses medimos ganhos e economias e revisamos o plano junto com você.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="juntos">
+  <div class="wrap">
+    <div class="sec-head"><h2>Como trabalhamos juntos</h2><p>Combinado claro desde o primeiro dia: o que a Momenta entrega e o que a empresa precisa fazer para o trabalho render.</p></div>
+    <div class="together">
+      <div class="tcard"><h3>Atendimento presencial</h3><p>Em Jaraguá do Sul e região: visitas à loja, inventários, layout e planograma feitos no local.</p></div>
+      <div class="tcard"><h3>Atendimento remoto</h3><p>Para todo o Brasil: relatórios, DRE, formação de preço, estratégia comercial e reuniões online. Visitas fora da região têm deslocamento cobrado à parte.</p></div>
+      <div class="tcard need"><h3>O que precisamos de você</h3><ul>
+        <li>Acesso ao sistema de vendas (PDV) ou relatórios exportados</li>
+        <li>Notas fiscais de compra (XML ou cópia) do período</li>
+        <li>Extrato da maquininha e das contas da empresa</li>
+        <li>Lista de despesas fixas e folha do mês</li>
+        <li>Um responsável na loja para as contagens e ajustes</li>
+      </ul><p class="fine-dark">Sem as informações no prazo combinado, a entrega é reprogramada e o prazo passa a contar do envio.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="planos">
+  <div class="wrap">
+    <div class="sec-head"><h2>Planos mensais</h2><p>Escolha o segmento e o porte da sua empresa: o conteúdo e os valores se ajustam.</p></div>
+    <div class="picker">
+      <div><p class="eyebrow">Segmento</p><div class="tabs" id="segTabs"></div></div>
+      <div><p class="eyebrow">Porte (faturamento mensal)</p><div class="tabs" id="porteTabs"></div></div>
+    </div>
+    <div class="plans" id="plans"></div>
+    <div class="cond">
+      <div><b>Diagnóstico abatido</b>Contratando um plano em até 30 dias, o valor do diagnóstico vira crédito na 1ª mensalidade.</div>
+      <div><b>Revisão a cada 6 meses</b>Medimos os ganhos da empresa e revisamos escopo e valores juntos.</div>
+      <div><b>Fechamento anual</b>Plano de 12 meses pago mês a mês: 10% de desconto.</div>
+    </div>
+  </div>
+</section>
+
+<section id="avulsos-itens" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Contrate só o que precisa</h2><p>Cada item dos planos também pode ser contratado sozinho, com valores de referência de mercado. Itens avulsos têm entrega mensal; entregas quinzenais são exclusivas dos planos.</p></div>
+    <div class="picker">
+      <div><p class="eyebrow">Segmento</p><div class="tabs" id="segTabs2"></div></div>
+      <div><p class="eyebrow">Porte (faturamento mensal)</p><div class="tabs" id="porteTabs2"></div></div>
+    </div>
+    <div class="carta-grid">
+      <div id="carta" class="carta"></div>
+      <aside class="ctotal">
+        <p class="eyebrow" style="color:rgba(245,242,234,.6)">Seu pacote avulso</p>
+        <div class="big" id="cTotal">—</div>
+        <p id="cAnual" style="opacity:.8;font-size:.9rem"></p>
+        <p id="cHint" class="chint"></p>
+        <a class="btn btn-lime" href="#contato" id="cGo" style="justify-content:center">Quero esses itens</a>
+        <p class="fine">Contrato mínimo de 3 meses para itens avulsos.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="avulsos" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Projetos avulsos</h2><p>Para resolver uma necessidade pontual, sem plano mensal. Valores para empresas de pequeno porte; médio e grande sob orçamento.</p></div>
+    <div class="table">
+      <div class="trow"><h4>Diagnóstico de Performance</h4><p>Raio-x de margem, perdas, estoque parado, preço e operação comercial, com plano de ação.</p><div class="v" id="diagPrice"></div></div>
+      <div class="trow"><h4>Planograma</h4><p>Desenho de gôndola por categoria: o que vai em cada prateleira, em que altura e com quantas frentes.</p><div class="v">a partir de R$ 1.199,99<small>até 5 categorias</small></div></div>
+      <div class="trow"><h4>Layout de loja</h4><p>Projeto de disposição da loja, fluxo de clientes, setores e pontos extras para aumentar o ticket médio.</p><div class="v">Sob consulta<small>por loja</small></div></div>
+      <div class="trow"><h4>Plano de estratégia comercial</h4><p>Metas, canais, carteira de clientes, calendário promocional e política comercial para 12 meses.</p><div class="v">Sob consulta<small>com acompanhamento de 30 dias</small></div></div>
+      <div class="trow"><h4>Formação de preço</h4><p>Preço de venda calculado a partir do custo real, impostos, despesas e margem desejada; markup por categoria, faixas de desconto e regras para a equipe de vendas.</p><div class="v">a partir de R$ 1.899,99<small>pagamento único</small></div></div>
+      <div class="trow"><h4>Fichas técnicas e custo de produção</h4><p>Custo real de cada produto fabricado (padaria, cozinha, indústria) e preço sugerido.</p><div class="v">a partir de R$ 689,99<small>até 30 produtos</small></div></div>
+      <div class="trow"><h4>Inventário geral</h4><p>Contagem completa, valor do estoque a custo e lista de itens parados ou vencendo.</p><div class="v">a partir de R$ 889,99<small>até 2.000 itens</small></div></div>
+      <div class="trow"><h4>Treinamento de equipe comercial</h4><p>Atendimento, venda consultiva, metas e rotina comercial para vendedores e operadores.</p><div class="v">a partir de R$ 1.499,99<small>turma de até 15 pessoas</small></div></div>
+      <div class="trow"><h4>Valuation</h4><p>Quanto vale a empresa (fluxo de caixa descontado e múltiplos de mercado), para venda, compra, entrada de sócio, trespasse ou captação.</p><div class="v">Sob consulta<small>com relatório</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="simulador" style="padding-top:0">
+  <div class="wrap">
+    <div class="sim">
+      <div>
+        <p class="eyebrow" style="color:rgba(245,242,234,.6)">Simulador</p>
+        <h2>Quanto sua empresa deixa na mesa?</h2>
+        <p class="sub">Mova os controles com os números aproximados da empresa. A conta é conservadora e serve só como referência.</p>
+        <div class="field"><label>Faturamento mensal <output id="oFat"></output></label><input type="range" id="fat" min="0" max="100" step="1" value="35"></div>
+        <div class="field"><label>Perdas, quebras e descontos (% do faturamento) <output id="oPer"></output></label><input type="range" id="per" min="0.5" max="8" step="0.1" value="3"></div>
+        <div class="field"><label>Ganho de margem possível (pontos %) <output id="oMar"></output></label><input type="range" id="mar" min="0" max="5" step="0.5" value="1.5"></div>
+      </div>
+      <div class="result">
+        <small style="opacity:.75">Ganho potencial estimado por ano</small>
+        <div class="big" id="rTotal">—</div>
+        <div class="line"><span>Reduzindo perdas em 30%</span><b id="rPer">—</b></div>
+        <div class="line"><span>Ajustando margem</span><b id="rMar">—</b></div>
+        <div class="line"><span>Porte</span><b id="rPorte">—</b></div>
+        <p class="fine">Estimativa ilustrativa, não é garantia de resultado. O número real sai do diagnóstico.</p>
+        <a class="btn btn-lime" href="#planos" id="simGo" style="align-self:flex-start">Ver planos para este porte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Perguntas frequentes</h2><p>Se a sua dúvida não estiver aqui, chama no WhatsApp.</p></div>
+    <div class="faq">
+      <details open><summary>Preciso trocar de sistema?</summary><p>Não. Trabalhamos com o sistema que a empresa já usa, seja PDV, ERP ou planilha. Usamos os relatórios que ele exporta ou um acesso de consulta. Você não troca nada e não para a operação.</p></details>
+      <details><summary>Meus dados ficam em sigilo?</summary><p>Sim. Tudo o que você compartilha (vendas, custos, notas, folha, fornecedores) é usado só para prestar o serviço e não é repassado a ninguém. O contrato tem cláusula de confidencialidade, e o tratamento dos dados segue a LGPD.</p></details>
+      <details><summary>A primeira conversa é mesmo gratuita?</summary><p>Sim, sem compromisso. Entendemos a empresa e apontamos onde enxergamos oportunidade. Só o diagnóstico em diante tem custo.</p></details>
+      <details><summary>Em quanto tempo vejo resultado?</summary><p>Os primeiros relatórios saem nas primeiras semanas após o envio das informações. Ajustes de preço, perdas e estoque costumam aparecer já nos primeiros meses, e a cada 6 meses medimos os ganhos junto com você.</p></details>
+      <details><summary>Vocês atendem fora de Jaraguá do Sul?</summary><p>Sim. O atendimento é presencial em Jaraguá do Sul e região e remoto para todo o Brasil. Visitas fora da região têm o deslocamento cobrado à parte.</p></details>
+      <details><summary>Qual o prazo de contrato?</summary><p>Os planos mensais têm contrato de 6 meses, com revisão de escopo e valores ao final de cada período. Itens avulsos têm mínimo de 3 meses. Projetos avulsos são pagos por entrega.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contato" style="padding-top:0">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow">Contato</p>
+      <h2>Vamos olhar a sua empresa?</h2>
+      <p style="color:var(--muted);max-width:28em">Preencha ao lado e envie pelo WhatsApp. Respondemos em até 1 dia útil para agendar a conversa gratuita, presencial ou online.</p>
+      <p style="margin-top:28px;font-size:.95rem"><b>Momenta Growth Ltda</b><br>Jaraguá do Sul · SC<br><a href="https://wa.me/5547992101482" target="_blank" rel="noopener">WhatsApp: +55 (47) 99210-1482</a><br><a href="mailto:galdinoalefe@gmail.com">galdinoalefe@gmail.com</a></p>
+    </div>
+    <form id="form" name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contato"><p hidden><label>Não preencha: <input name="bot-field"></label></p>
+      <div class="two">
+        <label>Seu nome<input name="nome" required></label>
+        <label>Empresa<input name="loja" required></label>
+      </div>
+      <div class="two">
+        <label>Segmento<select name="seg" id="segSel"></select></label>
+        <label>Porte<select name="porte" id="porteSel"></select></label>
+      </div>
+      <div class="two">
+        <label>Interesse<select name="plano" id="planoSel"><option>Conversa gratuita</option><option>Diagnóstico de Performance</option><option>Essencial</option><option>Performance</option><option>Gestão Completa</option><option>Itens avulsos</option><option>Projeto avulso</option></select></label>
+        <label>Cidade<input name="cidade" placeholder="Jaraguá do Sul"></label>
+      </div>
+      <input type="hidden" name="itens">
+      <label>Qual o maior desafio da empresa hoje?<textarea name="dor" rows="3" placeholder="Ex.: não sei se estou lucrando, vendas caindo, muita perda, loja desorganizada…"></textarea></label>
+      <label class="consent"><input type="checkbox" required> Concordo com a <a href="#privacidade" onclick="document.querySelector('.privacy').open=true">política de privacidade</a> e autorizo o contato.</label>
+      <button class="btn btn-ink" type="submit" style="justify-content:center">Gerar mensagem e enviar</button>
+      <div id="msgOut"></div>
+    </form>
+  </div>
+</section>
+
+<section id="privacidade" style="padding-top:0">
+  <div class="wrap">
+    <details class="privacy"><summary>Política de privacidade</summary>
+      <p><b>Quem somos.</b> Momenta Growth Ltda, CNPJ 52.414.412/0001-71, Jaraguá do Sul/SC, é a responsável pelos dados coletados neste site.</p>
+      <p><b>Quais dados coletamos.</b> Os dados que você preenche no formulário de contato: nome, empresa, segmento, porte, cidade e a mensagem. Não usamos cookies de rastreamento nem ferramentas de publicidade.</p>
+      <p><b>Para que usamos.</b> Para responder ao seu contato, agendar a conversa e enviar propostas. A base legal é o seu consentimento ao enviar o formulário e, se houver contratação, a execução do contrato.</p>
+      <p><b>Com quem compartilhamos.</b> Não vendemos nem cedemos seus dados. Eles passam apenas pelos serviços necessários para o contato chegar até nós (WhatsApp, e-mail e a hospedagem do site).</p>
+      <p><b>Por quanto tempo guardamos.</b> Pelo tempo necessário para o atendimento e a relação comercial, ou até você pedir a exclusão.</p>
+      <p><b>Seus direitos.</b> Você pode pedir acesso, correção ou exclusão dos seus dados a qualquer momento pelo e-mail galdinoalefe@gmail.com.</p>
+      <p><b>Dados dos clientes.</b> Informações da empresa enviadas durante o serviço (vendas, custos, notas, folha) são tratadas como confidenciais, usadas só para a prestação do serviço e protegidas por cláusula contratual.</p>
+      <p style="opacity:.7">Atualizada em novembro de 2026.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg width="34" height="34"><use href="#mark"/></svg><b>momenta</b><span style="color:rgba(245,242,234,.6)">growth</span></a>
+    <p>Momenta Growth Ltda · CNPJ 52.414.412/0001-71 · Jaraguá do Sul/SC · <a href="#privacidade" onclick="document.querySelector('.privacy').open=true">Política de privacidade</a></p>
+  </div>
+</footer>
+<a class="wa-float" href="https://wa.me/5547992101482?text=Ol%C3%A1%2C%20Momenta%20Growth!%20Vim%20pelo%20site%20e%20quero%20saber%20mais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3z"/></svg></a>
+
+<script>
+  const WHATSAPP = "5547992101482";
+  const EMAIL = "galdinoalefe@gmail.com";
+  const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:2,maximumFractionDigits:2});
+  const brl0 = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+  const fin = v => v - 0.01; // preços não redondos: 790 -> 789,99
+  const $ = id => document.getElementById(id);
+
+  const PORTES = {
+    pequeno:{label:"Pequeno", faixa:"até R$ 400 mil/mês", precos:[790,1490,2490], diag:390.99, mult:1},
+    medio:  {label:"Médio",   faixa:"R$ 400 mil a R$ 3 mi/mês", precos:[1890,3490,5900], diag:1290.99, mult:2.4},
+    grande: {label:"Grande",  faixa:"acima de R$ 3 mi/mês", precos:[4500,7900,null], diag:2990.99, mult:5.5}
+  };
+  // Preço avulso de referência (pequeno porte). Médio ×2,4 · Grande ×5,5
+  const ITENS = {
+    dre:{p:390}, rel:{p:290}, risco:{p:350}, quinz:{p:0,soPlano:true},
+    ciclico:{p:590}, preco:{p:390}, abc:{p:290}, ruptura:{p:290}, reuniao:{p:190},
+    perdas:{p:290}, fichas:{p:390}, comissao:{p:390}, compras:{p:390},
+    geral:{p:890}, layout:{p:690}, categ:{p:590}, estrat:{p:790}, canais:{p:590},
+    trade:{p:590}, fornec:{p:490}, cardapio:{p:590}, painel:{p:590},
+    valuation:{p:2900, anual:true}
+  };
+  const SEGS = {
+    varejo:{label:"Varejo", planos:[
+      [["dre","DRE mensal"],["rel","Vendas por departamento"],["risco","Contagem mensal dos itens de alto risco (alto valor, perecíveis e mais furtados)"],["quinz","Entregas quinzenais"]],
+      [["ciclico","Inventário cíclico semanal por produto"],["preco","Formação de preço e markup"],["abc","Curva ABC e controle de validade"],["ruptura","Controle de ruptura"],["reuniao","Reunião mensal de resultados"]],
+      [["geral","Inventário geral mensal"],["layout","Layout de loja e planograma"],["categ","Gestão de categorias e mix"],["estrat","Estratégia comercial e campanhas"],["fornec","Negociação com fornecedores"],["valuation","Valuation anual da empresa"],["painel","Painel online e acompanhamento semanal"]]]},
+    atacado:{label:"Atacado e distribuição", planos:[
+      [["dre","DRE mensal"],["rel","Vendas por cliente, vendedor e região"],["risco","Contagem mensal dos itens de alto risco"],["quinz","Entregas quinzenais"]],
+      [["ciclico","Inventário cíclico semanal por produto"],["preco","Formação de preço, política de preços e descontos"],["abc","Curva ABC de produtos e clientes"],["comissao","Metas e comissionamento"],["reuniao","Reunião mensal de resultados"]],
+      [["geral","Inventário geral mensal"],["estrat","Plano comercial, carteira e territórios"],["canais","Canais e rotas de atendimento"],["trade","Trade marketing nos clientes"],["fornec","Negociação com fornecedores"],["valuation","Valuation anual da empresa"],["painel","Painel online e acompanhamento semanal"]]]},
+    industria:{label:"Indústria", planos:[
+      [["dre","DRE mensal"],["rel","Vendas por produto e canal"],["risco","Contagem mensal dos insumos e produtos de alto risco"],["quinz","Entregas quinzenais"]],
+      [["ciclico","Inventário cíclico semanal por insumo e produto"],["fichas","Custo de produção e fichas técnicas"],["preco","Formação de preço e margem por produto"],["perdas","Perdas de produção"],["abc","Curva ABC de produtos e clientes"],["reuniao","Reunião mensal de resultados"]],
+      [["geral","Inventário geral mensal (insumos e produto acabado)"],["estrat","Estratégia comercial e canais"],["categ","Mix e portfólio de produtos"],["trade","Planograma e trade no PDV dos clientes"],["fornec","Compras e contratos com fornecedores"],["valuation","Valuation anual da empresa"],["painel","Painel online e acompanhamento semanal"]]]},
+    food:{label:"Food service", planos:[
+      [["dre","DRE mensal"],["rel","CMV e vendas por categoria"],["risco","Contagem mensal dos insumos de alto risco (proteínas, bebidas)"],["quinz","Entregas quinzenais"]],
+      [["ciclico","Inventário cíclico semanal por insumo"],["fichas","Fichas técnicas de todo o cardápio"],["preco","Formação de preço e margem por prato"],["perdas","Desperdício e perdas na cozinha"],["compras","Compras e estoque mínimo"],["reuniao","Reunião mensal de resultados"]],
+      [["geral","Inventário geral mensal"],["cardapio","Engenharia de cardápio"],["layout","Layout de salão e cozinha"],["estrat","Estratégia comercial, delivery e campanhas"],["fornec","Negociação com fornecedores"],["valuation","Valuation anual da empresa"],["painel","Painel online e acompanhamento semanal"]]]}
+  };
+  const NOMES=["Essencial","Performance","Gestão Completa"];
+  const DESCR=["Para enxergar os números da empresa todo mês.","Para corrigir margem, preço e perdas.","Para ter a operação e o comercial acompanhados de perto."];
+  let seg="varejo", porte="pequeno", sel=new Set();
+
+  const itemPrice = k => fin(Math.round(ITENS[k].p*PORTES[porte].mult/10)*10);
+  const LIMITE = 2000; // acima disso, preço sob consulta
+  const consulta = k => itemPrice(k) > LIMITE;
+  const precoTxt = k => consulta(k) ? "Sob consulta" : brl(itemPrice(k)) + (ITENS[k].anual?"/ano":"/mês");
+
+  function tabs(el,obj,cur,fn){
+    el.innerHTML="";
+    Object.entries(obj).forEach(([k,v])=>{
+      const b=document.createElement("button");b.type="button";b.className="tab"+(k===cur?" on":"");
+      b.innerHTML=v.label+(v.faixa?`<small>${v.faixa}</small>`:"");
+      b.onclick=()=>fn(k);el.appendChild(b);
+    });
+  }
+  function render(){
+    tabs($("segTabs"),SEGS,seg,k=>{seg=k;sel.clear();render()});
+    tabs($("porteTabs"),PORTES,porte,k=>{porte=k;render()});
+    tabs($("segTabs2"),SEGS,seg,k=>{seg=k;sel.clear();render()});
+    tabs($("porteTabs2"),PORTES,porte,k=>{porte=k;render()});
+    const P=PORTES[porte], S=SEGS[seg];
+    $("plans").innerHTML=NOMES.map((n,i)=>{
+      const p=P.precos[i] && fin(P.precos[i]);
+      const desde = porte!=="pequeno" ? '<span class="desde">a partir de</span>' : "";
+      const price=p?`${desde}<div class="price">${brl(p).replace(/,(\d\d)$/,'<sup>,$1</sup>')}<small>/mês</small></div><p class="price-note">Contrato de 6 meses</p>`
+                   :`<div class="price" style="font-size:2rem">Sob medida</div><p class="price-note">a partir de R$ 11.999,99/mês</p>`;
+      const items=(i>0?[`<li class="plus">Tudo do ${NOMES[i-1]}</li>`]:[]).concat(S.planos[i].map(x=>`<li>${x[1]}</li>`)).join("");
+      const f=i===1;
+      return `<div class="plan${f?" featured":""}">${f?'<span class="tag">Mais escolhido</span>':""}
+        <h3>${n}</h3><p class="for">${DESCR[i]}</p>${price}<ul>${items}</ul>
+        <a class="btn ${f?"btn-lime":"btn-ghost"}" href="#contato" data-plan="${n}">Quero o ${n}</a></div>`;
+    }).join("");
+    document.querySelectorAll("[data-plan]").forEach(a=>a.addEventListener("click",()=>{
+      $("planoSel").value=a.dataset.plan;$("segSel").value=S.label;$("porteSel").value=P.label+" ("+P.faixa+")";
+    }));
+    $("diagPrice").innerHTML= P.diag>LIMITE ? `Sob consulta<small>${P.label.toLowerCase()} porte · após a conversa gratuita</small>` : `${porte==="pequeno"?"":"a partir de "}${brl(P.diag)}<small>${P.label.toLowerCase()} porte · após a conversa gratuita</small>`;
+    renderCarta();
+  }
+
+  function renderCarta(){
+    const S=SEGS[seg];
+    $("carta").innerHTML=S.planos.map((lista,i)=>`
+      <div class="cgroup"><p class="eyebrow">Itens do ${NOMES[i]}</p>
+      ${lista.filter(x=>!ITENS[x[0]].soPlano).map(([k,n])=>`
+        <label class="citem${sel.has(k)?" on":""}"><input type="checkbox" data-k="${k}" ${sel.has(k)?"checked":""}>
+        <span>${n}</span><b>${consulta(k)?"Sob consulta":brl(itemPrice(k))}<small>${consulta(k)?"":(ITENS[k].anual?"/ano":"/mês")}</small></b></label>`).join("")}
+      </div>`).join("");
+    $("carta").querySelectorAll("input").forEach(c=>c.onchange=()=>{c.checked?sel.add(c.dataset.k):sel.delete(c.dataset.k);renderCarta();});
+    let mensal=0, anual=0, nCons=0;
+    sel.forEach(k=>{ if(consulta(k)) nCons++; else if(ITENS[k].anual) anual+=itemPrice(k); else mensal+=itemPrice(k); });
+    $("cTotal").textContent=!sel.size?"—":(mensal?brl(mensal)+"/mês":(nCons?"Sob consulta":"—"));
+    $("cAnual").textContent=[anual?"+ "+brl(anual)+"/ano (valuation)":"", nCons&&mensal?"+ "+nCons+(nCons>1?" itens":" item")+" sob consulta":""].filter(Boolean).join(" · ");
+    // menor plano que cobre todos os itens escolhidos
+    let hint="";
+    if(sel.size){
+      const P=PORTES[porte];
+      const tier=Math.max(...[...sel].map(k=>S.planos.findIndex(l=>l.some(x=>x[0]===k))));
+      const pp=P.precos[tier] && fin(P.precos[tier]);
+      const custoAvulso=mensal+anual/12;
+      if(pp && pp<custoAvulso && !nCons) hint=`O plano <b>${NOMES[tier]}</b> inclui tudo isso e muito mais por ${brl(pp)}/mês: economia de ${brl(custoAvulso-pp)} por mês.`;
+      else if(pp && nCons) hint=`Itens sob consulta entram no orçamento. Se quiser tudo do ${NOMES[tier]}, o plano sai por ${brl(pp)}/mês.`;
+      else if(pp) hint=`Com poucos itens, contratar avulso compensa. Se quiser tudo do ${NOMES[tier]}, o plano sai por ${brl(pp)}/mês.`;
+      else hint=`Para o porte grande, o ${NOMES[tier]} é montado sob medida. Fale com a gente.`;
+    }
+    $("cHint").innerHTML=hint;
+    $("cHint").style.display=hint?"block":"none";
+  }
+
+  $("segSel").innerHTML=Object.values(SEGS).map(s=>`<option>${s.label}</option>`).join("")+"<option>Outro</option>";
+  $("porteSel").innerHTML=Object.values(PORTES).map(p=>`<option>${p.label} (${p.faixa})</option>`).join("");
+  render();
+  $("cGo").addEventListener("click",()=>{
+    $("planoSel").value="Itens avulsos";$("segSel").value=SEGS[seg].label;$("porteSel").value=PORTES[porte].label+" ("+PORTES[porte].faixa+")";
+  });
+
+  // Simulador: escala não linear de R$ 20 mil a R$ 20 mi/mês
+  const fatVal = s => { const v=20000*Math.pow(1000,s/100); const st=v<200000?5000:v<2000000?50000:250000; return Math.round(v/st)*st; };
+  function calc(){
+    const fat=fatVal(+$("fat").value), per=+$("per").value, mar=+$("mar").value;
+    $("oFat").textContent=brl0(fat);
+    $("oPer").textContent=per.toLocaleString("pt-BR")+"%";
+    $("oMar").textContent=mar.toLocaleString("pt-BR")+" pp";
+    const gPer=fat*(per/100)*0.30*12, gMar=fat*(mar/100)*12;
+    $("rPer").textContent=brl0(gPer); $("rMar").textContent=brl0(gMar); $("rTotal").textContent=brl0(gPer+gMar);
+    const k= fat<=400000?"pequeno":fat<=3000000?"medio":"grande";
+    $("rPorte").textContent=PORTES[k].label; $("simGo").dataset.porte=k;
+  }
+  ["fat","per","mar"].forEach(id=>$(id).addEventListener("input",calc)); calc();
+  $("simGo").addEventListener("click",()=>{porte=$("simGo").dataset.porte;render();});
+
+  $("form").addEventListener("submit",e=>{
+    e.preventDefault();
+    const f=new FormData(e.target);
+    let extra="";
+    if(f.get("plano")==="Itens avulsos" && sel.size){
+      const S=SEGS[seg]; const nomes=[...sel].map(k=>{for(const l of S.planos){const x=l.find(y=>y[0]===k); if(x) return "• "+x[1]+" ("+precoTxt(k)+")";}});
+      extra="\nItens escolhidos:\n"+nomes.join("\n");
+    }
+    const msg=`Olá, Momenta Growth! Sou ${f.get("nome")}, da empresa ${f.get("loja")} (${f.get("seg")}, porte ${f.get("porte")}${f.get("cidade")?", "+f.get("cidade"):""}).\nTenho interesse em: ${f.get("plano")}.${extra}\n${f.get("dor")?"Maior desafio hoje: "+f.get("dor"):""}`;
+    // Hospedado no Netlify: grava o cadastro e dispara o e-mail automático
+    try{ if(!/claude|localhost|^$/.test(location.hostname)){
+      const d=new FormData(e.target); d.set("itens", extra.trim());
+      fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(d).toString()}).catch(()=>{});
+    }}catch(_){}
+    const out=$("msgOut");
+    out.textContent="Mensagem pronta. Envie pelo WhatsApp ou por e-mail:\n\n"+msg+"\n\n";
+    const box=document.createElement("div");box.style.cssText="display:flex;gap:10px;flex-wrap:wrap";
+    const wa=document.createElement("a");wa.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg);
+    wa.target="_blank";wa.rel="noopener";wa.className="btn btn-lime";wa.textContent="Enviar no WhatsApp";
+    const em=document.createElement("a");
+    em.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Contato pelo site — "+f.get("loja"))+"&body="+encodeURIComponent(msg);
+    em.className="btn btn-ghost";em.textContent="Enviar por e-mail";
+    box.append(wa,em);out.appendChild(box);out.style.display="block";
+  });
+</script>
+</body>
+</html>
