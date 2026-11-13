@@ -232,6 +232,39 @@
   .consent{display:flex;gap:10px;align-items:flex-start;font-weight:500!important;font-size:.85rem!important}
   .consent input{width:auto!important;margin-top:3px!important}
   footer a{color:var(--lime)}
+  #treinamento{padding-top:0}
+  .trein{background:var(--ink);color:var(--cream);border-radius:32px;padding:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+  .trein h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin:10px 0 14px}
+  .trein .sub{opacity:.8;max-width:34em}
+  .tchips{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .tchips span{border:1.5px solid var(--lime);color:var(--lime);border-radius:999px;padding:7px 16px;font-weight:600;font-size:.92rem}
+  .raiox{grid-column:1/-1}
+  .rx{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px}
+  .rx div{background:var(--ink-2);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:4px}
+  .rx b{font-family:"Bricolage Grotesque";font-size:2.6rem;line-height:1;color:var(--lime)}
+  .rx span{font-size:.9rem;opacity:.9}
+  .tmods{grid-row:1;grid-column:2}
+  .tmods ul{list-style:none;margin-top:12px}
+  .tmods li{padding:8px 0 8px 26px;position:relative;border-top:1px solid rgba(245,242,234,.12);font-size:.95rem}
+  .tmods li::before{content:"✓";position:absolute;left:0;color:var(--lime);font-weight:700}
+  .tpacks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+  .tpack{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;position:relative}
+  .tpack:first-child{border:2px solid var(--ink)}
+  .ttag{position:absolute;top:-12px;left:24px;background:var(--lime);color:var(--ink);font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+  .tpack h3{font-size:1.25rem}
+  .tfor{font-size:.88rem;color:var(--muted);margin:6px 0 16px;min-height:2.6em}
+  .tprice{font-family:"Bricolage Grotesque";font-weight:800;font-size:2.2rem;line-height:1}
+  .tprice sup{font-size:.45em}
+  .tprice.tsob{font-size:1.6rem}
+  .tnote{font-size:.8rem;color:var(--muted);margin:6px 0 16px}
+  .tpack ul{list-style:none;flex:1;margin-bottom:18px}
+  .tpack li{font-size:.9rem;padding:7px 0;border-top:1px solid var(--line)}
+  .tpack .btn{justify-content:center}
+  .btn-ghost-l{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  @media(max-width:960px){.trein{grid-template-columns:1fr;padding:28px}.tmods{grid-row:auto;grid-column:auto}.rx{grid-template-columns:repeat(5,1fr);gap:6px}.rx div{padding:10px}.rx b{font-size:1.8rem}.rx span{font-size:.7rem}.tpacks{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.tpacks{grid-template-columns:1fr}}
+  nav ul{gap:20px;font-size:.88rem;white-space:nowrap}
+  @media(max-width:1180px){nav ul{display:none}}
 </style>
 </head>
 <body>
@@ -252,11 +285,10 @@
     <a class="brand" href="#top"><svg width="34" height="34"><use href="#mark"/></svg><b>momenta</b><span>growth</span></a>
     <ul>
       <li><a href="#sobre">Quem somos</a></li>
-      <li><a href="#segmentos">Segmentos</a></li>
       <li><a href="#solucoes">Soluções</a></li>
-      <li><a href="#como">Como funciona</a></li>
       <li><a href="#planos">Planos</a></li>
       <li><a href="#avulsos-itens">Avulsos</a></li>
+      <li><a href="#treinamento">Treinamento</a></li>
       <li><a href="#faq">Dúvidas</a></li>
           </ul>
     <a class="btn btn-ink" href="#contato">Conversa gratuita</a>
@@ -434,6 +466,44 @@
   </div>
 </section>
 
+<section id="treinamento">
+  <div class="wrap">
+    <div class="trein">
+      <div class="trein-head">
+        <p class="eyebrow" style="color:rgba(245,242,234,.6)">Treinamento Momenta</p>
+        <h2>Vendedor de Alta Performance</h2>
+        <p class="sub">Método para qualquer vendedor e qualquer produto: balcão, rua, WhatsApp ou reunião com empresa. 10 módulos, cerca de 8 horas, com exercício prático em toda aula.</p>
+        <div class="tchips"><span>Ambição</span><span>Técnica</span><span>Resiliência</span></div>
+      </div>
+      <div class="raiox">
+        <p class="eyebrow" style="color:rgba(245,242,234,.6)">Método RAIO-X da venda</p>
+        <div class="rx">
+          <div><b>R</b><span>Rapport</span></div><div><b>A</b><span>Apurar a dor</span></div><div><b>I</b><span>Impacto</span></div><div><b>O</b><span>Oferta</span></div><div><b>X</b><span>X da questão</span></div>
+        </div>
+      </div>
+      <div class="tmods">
+        <p class="eyebrow" style="color:rgba(245,242,234,.6)">O que você aprende</p>
+        <ul>
+          <li>Metas, indicadores e rotina que gera venda</li>
+          <li>Comunicação que vende: escuta, perguntas e linguagem</li>
+          <li>Venda consultiva com o método RAIO-X</li>
+          <li>Ticket médio: venda cruzada e venda superior</li>
+          <li>Venda por valor e como responder "está caro"</li>
+          <li>Fechamento, pós-venda e indicação</li>
+          <li>Gestão de emoções: o "não" sem perder o ritmo</li>
+          <li>Plano de ação de 30 dias</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tpacks">
+      <div class="tpack"><span class="ttag">Lançamento</span><h3>Online individual</h3><p class="tfor">Aulas gravadas para fazer no seu ritmo.</p><div class="tprice">R$ 397<sup>,99</sup></div><p class="tnote">de R$ 497,99 · 12 meses de acesso</p><ul><li>10 módulos gravados</li><li>Apostila, planilha de indicadores e cartão RAIO-X</li><li>Certificado</li></ul><a class="btn btn-lime" target="_blank" rel="noopener" href="https://wa.me/5547992101482?text=Ol%C3%A1%21%20Quero%20o%20treinamento%20Vendedor%20de%20Alta%20Performance%20ONLINE%20%28lan%C3%A7amento%20R%24%20397%2C99%29.">Quero o online</a></div>
+      <div class="tpack"><h3>Presencial turma aberta</h3><p class="tfor">1 dia em Jaraguá do Sul, com simulações de atendimento.</p><div class="tprice">R$ 697<sup>,99</sup></div><p class="tnote">por pessoa · 8 horas</p><ul><li>Material impresso e certificado</li><li>Simulações com o método RAIO-X</li><li>6 meses de acesso ao online</li></ul><a class="btn btn-ghost-l" target="_blank" rel="noopener" href="https://wa.me/5547992101482?text=Ol%C3%A1%21%20Quero%20garantir%20vaga%20na%20pr%C3%B3xima%20turma%20PRESENCIAL%20do%20treinamento%20Vendedor%20de%20Alta%20Performance.">Garantir minha vaga</a></div>
+      <div class="tpack"><h3>Online para empresas</h3><p class="tfor">Licenças para toda a equipe comercial.</p><div class="tprice tsob">Sob consulta</div><p class="tnote">conforme o tamanho da equipe</p><ul><li>Acesso para cada vendedor</li><li>1 encontro ao vivo de 1 hora com o gestor</li><li>Acompanhamento dos indicadores</li></ul><a class="btn btn-ghost-l" target="_blank" rel="noopener" href="https://wa.me/5547992101482?text=Ol%C3%A1%21%20Quero%20uma%20proposta%20do%20treinamento%20Vendedor%20de%20Alta%20Performance%20ONLINE%20para%20a%20equipe%20da%20minha%20empresa.">Pedir proposta</a></div>
+      <div class="tpack"><h3>Presencial in-company</h3><p class="tfor">Turma fechada na sua empresa.</p><div class="tprice tsob">Sob consulta</div><p class="tnote">presencial ou remoto</p><ul><li>Exemplos com os seus produtos</li><li>Simulações com a sua equipe</li><li>Plano de 30 dias da equipe</li></ul><a class="btn btn-ghost-l" target="_blank" rel="noopener" href="https://wa.me/5547992101482?text=Ol%C3%A1%21%20Quero%20uma%20proposta%20do%20treinamento%20Vendedor%20de%20Alta%20Performance%20IN-COMPANY%20na%20minha%20empresa.">Pedir proposta</a></div>
+    </div>
+  </div>
+</section>
+
 <section id="simulador" style="padding-top:0">
   <div class="wrap">
     <div class="sim">
@@ -491,7 +561,7 @@
         <label>Porte<select name="porte" id="porteSel"></select></label>
       </div>
       <div class="two">
-        <label>Interesse<select name="plano" id="planoSel"><option>Conversa gratuita</option><option>Diagnóstico de Performance</option><option>Essencial</option><option>Performance</option><option>Gestão Completa</option><option>Itens avulsos</option><option>Projeto avulso</option></select></label>
+        <label>Interesse<select name="plano" id="planoSel"><option>Conversa gratuita</option><option>Diagnóstico de Performance</option><option>Essencial</option><option>Performance</option><option>Gestão Completa</option><option>Itens avulsos</option><option>Projeto avulso</option><option>Treinamento de vendas</option></select></label>
         <label>Cidade<input name="cidade" placeholder="Jaraguá do Sul"></label>
       </div>
       <input type="hidden" name="itens">
