@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://momentagrowth.com.br/sitemap.xml
